@@ -4,6 +4,9 @@ import com.example.aiproject.dto.ChatCompletionRequest;
 import com.example.aiproject.dto.ChatCompletionResponse;
 import com.example.aiproject.dto.MyResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +20,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.net.URI;
 
+@Getter
+@Setter
 @Service
 public class OpenAiService {
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Symptom Diagnosis & Treatment Suggesting</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    <script defer src="js/main.js"></script>
+</head>
+<body>
+
+    <h5 >Get diagnosis and treatment suggestion</h5>
+    <form id="form-treatment">
+
+        <div >
+            <p >Provides AI-powered treatment suggestion based on diagnosis of symptoms</p>
+            <label for="prompt">Topic</label> <input type="text" id="prompt" class="result"
+                                                    placeholder="Enter symptom">
+        </div>
+        <div >
+            <div >
+                <button type="submit" class="btn btn-primary" id="btn-get-joke">Get diagnosis</button>
+            </div>
+        </div>
+    </form>
+    <p id="result" class="result"></p>
+
+</body>
+</html>

@@ -2,6 +2,7 @@ package com.example.aiproject.api;
 
 
 import com.example.aiproject.dto.MyResponse;
+import com.example.aiproject.service.ClinicalTableApiService;
 import com.example.aiproject.service.OpenAiService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class TreatmentSuggestionController {
 
     private final OpenAiService service;
+    private final ClinicalTableApiService clinicalService;
 
     static final String PRIMING_MESSAGE = """
             You are a helpful assistant that provides treatment suggestions.
@@ -26,6 +28,8 @@ public class TreatmentSuggestionController {
 
     @GetMapping
     public MyResponse getTreatmentSuggestion(@RequestParam String prompt){
-        return service.makeRequest(prompt,PRIMING_MESSAGE);
+        String diagnosis = clinicalService.diagnose(prompt);
+
+        return service.makeRequest(diagnosis,PRIMING_MESSAGE);
     }
 }
