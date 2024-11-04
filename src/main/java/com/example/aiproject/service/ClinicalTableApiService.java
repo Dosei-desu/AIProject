@@ -21,8 +21,8 @@ public class ClinicalTableApiService {
                 .bodyToMono(Diagnosis.class);
 
 
-        System.out.println("DIAGNOSIS----"+diagnosisMono+"----!!!");
-        //return diagnosisMono.toString();
-        return "dog bite";
+        System.out.println("DIAGNOSIS----"+diagnosisMono.toString()+"----!!!");
+        return diagnosisMono.toString();
+        //return "dog bite";
     }
 }

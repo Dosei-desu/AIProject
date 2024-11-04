@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
@@ -12,13 +14,15 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class Diagnosis {
     private int id;
-    private int[] idc_9_codes;
-    private Object[] object;
-    private String[][] diagnoses;
+    private List<Integer> idc_9_codes;
+    private Object unknownObject;
+    private List<List<String>> diagnoses;
 
     @Override
     public String toString() {
 
-        return Arrays.stream(diagnoses).flatMap(Arrays::stream).collect(Collectors.joining(","));
+        return diagnoses.stream()
+                .flatMap(Collection::stream)
+                .collect(Collectors.joining(","));
     }
 }
