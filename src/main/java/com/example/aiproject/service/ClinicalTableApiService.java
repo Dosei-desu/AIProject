@@ -6,23 +6,31 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @Service
 public class ClinicalTableApiService {
 
     @Value("${clinical_search.url}")
     private String DIAGNOSIS_URL;
 
-    public String diagnose(String symptom){
+    public Diagnosis diagnose(String symptom) {
         WebClient client = WebClient.create();
-
-        Mono<Diagnosis> diagnosisMono = client.get()
-                .uri(DIAGNOSIS_URL+symptom)
+        Mono<Object> objectMono = client.get()
+                .uri(DIAGNOSIS_URL + symptom)
                 .retrieve()
-                .bodyToMono(Diagnosis.class);
+                .bodyToMono(Object.class);
+        Diagnosis diagnosis = convertObjectToDiagnosis(symptom,objectMono.block());
+        System.out.println("DIAGNOSIS----"+diagnosis+"----!!!");
+        return diagnosis;
+    }
 
-
-        System.out.println("DIAGNOSIS----"+diagnosisMono.toString()+"----!!!");
-        return diagnosisMono.toString();
-        //return "dog bite";
+    private Diagnosis convertObjectToDiagnosis(String prompt, Object object){
+        List<String> diagnoses = List.of(
+                object.toString()
+                        .split("\\[\\[")[1]
+                        .split("]]")[0]
+                        .split("], \\["));
+        return new Diagnosis(prompt,diagnoses);
     }
 }
