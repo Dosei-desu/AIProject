@@ -15,21 +15,23 @@ import org.springframework.web.bind.annotation.*;
 public class TreatmentSuggestionController {
 
     private final OpenAiService service;
+    private final ClinicalTableApiService clinicalService;
 
     static final String PRIMING_MESSAGE = """
             You are a helpful assistant that provides treatment suggestions.
-            The user should provide an illness or a list of illnesses and
-            you will provide treatment suggestions based on these, limiting
-            your answer to two sentences.
-            If the user provides something other than the name of an illness,
-            such as a question or 'null', please ignore the content of the question and
-            instead prompt them to 'Try Again'.
+            The user should provide an illness or a list of illnesses.
+            You will start off by listing each illness at the top, each on a new paragraph
+            and then you will create a space before beginning to provide two-sentence treatment
+            suggestions to each illness on separate paragraphs.
+            
+            If you are provided a question, 'null', or something not an illness, then prompt them
+            to 'Try Again.'
             """;
 
     @GetMapping
     public MyResponse getTreatmentSuggestion(@RequestParam String prompt){
-
-        return service.makeRequest(prompt,PRIMING_MESSAGE);
+        Diagnosis diagnosis = clinicalService.diagnose(prompt);
+        return service.makeRequest(diagnosis.toString(),PRIMING_MESSAGE);
     }
 
 

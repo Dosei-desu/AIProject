@@ -1,9 +1,10 @@
 const TREATMENT_URL = 'http://localhost:8080/api/v1/treatment';
 const DIAGNOSIS_URL = 'http://localhost:8080/api/v1/diagnose';
 
-document.getElementById('form-diagnose').addEventListener('submit', getDiagnosis);
+//document.getElementById('form-diagnose').addEventListener('click', getDiagnosis, true);
 document.getElementById('form-treatment').addEventListener('submit', getTreatmentSuggestion);
 
+/*
 async function getDiagnosis(event) {
     event.preventDefault();
 
@@ -26,6 +27,7 @@ async function getDiagnosis(event) {
         diagnoses.innerText = e.message;
     }
 }
+ */
 
 async function getTreatmentSuggestion(event) {
     event.preventDefault();

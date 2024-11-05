@@ -13,34 +13,20 @@
 <body>
 
 <h5 >Get diagnosis and treatment suggestion</h5>
-<form id="form-diagnose">
-
-    <div >
-        <p >Provides AI-powered treatment suggestion based on diagnosis of symptoms</p>
-        <label for="symptom">Diagnose</label>
-        <input type="text" id="symptom" class="result" placeholder="Enter symptom">
-    </div>
-    <div >
-        <div >
-            <button type="submit" class="btn btn-primary" id="diagnosis-btn">Get diagnosis</button>
-        </div>
-    </div>
-</form>
-<div id="diagnoses"><ul></ul></div>
 <form id="form-treatment">
 
     <div >
         <p >Provides AI-powered treatment suggestion based on diagnosis of symptoms</p>
-        <label for="prompt">Treatment</label>
-        <input type="text" id="prompt" class="result" placeholder="Enter diagnosis">
+        <label for="prompt">Symptom</label>
+        <input type="text" id="prompt" class="result" placeholder="Enter symptom">
     </div>
     <div >
         <div >
-            <button type="submit" class="btn btn-primary" id="treatment-btn">Get treatment suggestion</button>
+            <button type="submit" class="btn btn-primary" id="treatment-btn">Get diagnosis & treatment</button>
         </div>
     </div>
 </form>
-<p id="result"></p>
+<div id="result"><ul></ul></div>
 
 </body>
 </html>
