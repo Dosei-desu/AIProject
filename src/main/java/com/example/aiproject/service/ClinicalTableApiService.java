@@ -26,11 +26,16 @@ public class ClinicalTableApiService {
     }
 
     private Diagnosis convertObjectToDiagnosis(String prompt, Object object){
-        List<String> diagnoses = List.of(
-                object.toString()
-                        .split("\\[\\[")[1]
-                        .split("]]")[0]
-                        .split("], \\["));
-        return new Diagnosis(prompt,diagnoses);
+        if(object.toString().endsWith("[]]")){
+            List<String> nullString = List.of("null");
+            return new Diagnosis(prompt,nullString);
+        }else {
+            List<String> diagnoses = List.of(
+                    object.toString()
+                            .split("\\[\\[")[1]
+                            .split("]]")[0]
+                            .split("], \\["));
+            return new Diagnosis(prompt, diagnoses);
+        }
     }
 }

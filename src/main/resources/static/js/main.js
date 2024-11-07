@@ -38,8 +38,8 @@ async function getTreatmentSuggestion(event) {
     try {
         const response = await fetch(URL)
             .then(handleHttpErrors)
-        console.log(response.answer)
-        document.getElementById('result').innerText = response.answer;
+        console.log(response.toString())
+        document.getElementById('result').innerText = response;
     } catch (e) {
         result.style.color = "red";
         result.innerText = e.message;

@@ -3,6 +3,7 @@ package com.example.aiproject.service;
 import com.example.aiproject.dto.ChatCompletionRequest;
 import com.example.aiproject.dto.ChatCompletionResponse;
 import com.example.aiproject.dto.MyResponse;
+import com.example.aiproject.dto.Treatment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,8 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 import org.springframework.web.server.ResponseStatusException;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -62,6 +65,33 @@ public class OpenAiService {
     //Use this constructor for testing, to inject a mock client
     public OpenAiService(WebClient client) {
         this.client = client;
+    }
+
+    public List<Treatment> generateTreatmentList(String prompt, String primingMessage) {
+        //calls the MakeRequest method, takes the reply and splits it based on symbols
+        //that were planted in the priming message (% and #)
+        //then it places those in a list of treatments
+        MyResponse response = makeRequest(prompt,primingMessage);
+
+        if (response.getAnswer().toLowerCase().contains("try again"))
+        {
+            return List.of(new Treatment("Try Again.",
+                    "Please enter a valid symptom."));
+        }
+        else
+        {
+            List<Treatment> treatmentList = new ArrayList<>();
+            String[] responseList = response.getAnswer().split("#");
+            for (String s : responseList) {
+                String[] splitList = s.split("%");
+                //uses trim, since the OpenAI response seems to contain a lot of empty spaces
+                treatmentList.add(new Treatment(
+                        splitList[0].trim(),
+                        splitList[1].trim()
+                ));
+            }
+            return treatmentList;
+        }
     }
 
     public MyResponse makeRequest(String userPrompt, String primingMessage) {
