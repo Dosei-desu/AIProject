@@ -72,10 +72,10 @@ public class OpenAiService {
         //that were planted in the priming message (% and #)
         //then it places those in a list of treatments
         MyResponse response = makeRequest(prompt,primingMessage);
-
+        System.out.println(response.getAnswer());
         if (response.getAnswer().toLowerCase().contains("try again"))
         {
-            return List.of(new Treatment("Try Again.",
+            return List.of(new Treatment("Try Again",
                     "Please enter a valid symptom."));
         }
         else

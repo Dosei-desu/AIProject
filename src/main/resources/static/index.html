@@ -12,21 +12,22 @@
 </head>
 <body>
 
-<h5 >Get diagnosis and treatment suggestion</h5>
-<form id="form-treatment">
+<div class="container text-center">
+    <h2>Diagnosis and Treatment Suggestion</h2>
+    <form id="form-treatment">
 
-    <div >
-        <p >Provides AI-powered treatment suggestion based on diagnosis of symptoms</p>
-        <label for="prompt">Symptom</label>
-        <input type="text" id="prompt" class="result" placeholder="Enter symptom">
-    </div>
-    <div >
-        <div >
-            <button type="submit" class="btn btn-primary" id="treatment-btn">Get diagnosis & treatment</button>
+        <div class="column" style="margin-bottom: 1em">
+            <p><i>Provides AI-powered treatment suggestion based on a diagnosis of symptoms</i></p>
+            <input type="text" id="prompt" class="result" placeholder="Enter symptom">
         </div>
-    </div>
-</form>
-<div id="result"><ul></ul></div>
+        <div>
+            <div>
+                <button type="submit" id="treatment-btn">Get diagnosis & treatment</button>
+            </div>
+        </div>
+    </form>
+    <div id="result" class="text center" style="margin-top: 1em"></div>
+</div>
 
 </body>
 </html>

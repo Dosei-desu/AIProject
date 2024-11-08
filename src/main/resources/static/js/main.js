@@ -39,11 +39,28 @@ async function getTreatmentSuggestion(event) {
         const response = await fetch(URL)
             .then(handleHttpErrors)
         console.log(response.toString())
-        document.getElementById('result').innerText = response;
+        //document.getElementById('result').innerText = response
+        display(response)
     } catch (e) {
-        result.style.color = "red";
-        result.innerText = e.message;
+        result.style.color = "red"
+        result.innerText = e.message
     }
+}
+
+
+function display(response) {
+    const resultContainer = document.getElementById('result');
+    resultContainer.innerHTML = ''; // Clear previous results
+
+    const ul = document.createElement('ul');
+
+    response.forEach(treatment => {
+        const li = document.createElement('li');
+        li.textContent = `${treatment.diagnosisName}: ${treatment.treatmentSuggestion}`;
+        ul.appendChild(li);
+    });
+
+    resultContainer.appendChild(ul);
 }
 
 async function handleHttpErrors(res) {
